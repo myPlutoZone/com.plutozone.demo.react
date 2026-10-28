@@ -26,16 +26,16 @@ export default function Signup() {
 	const { signup } = useAuth();
 
 	const [name, setName] =
-		useState("");
+		useState("플루토");
 
 	const [email, setEmail] =
-		useState("");
+		useState("pluto@plutozone.com");
 
 	const [password, setPassword] =
-		useState("");
+		useState("12345678");
 
 	const [passwordConfirm, setPasswordConfirm] =
-		useState("");
+		useState("12345678");
 
 	const [error, setError] =
 		useState("");
@@ -85,7 +85,6 @@ export default function Signup() {
 		<section className="auth-page">
 			<div className="card auth-card">
 				<h1>회원가입</h1>
-
 				<form
 					onSubmit={handleSubmit}
 					className="form"

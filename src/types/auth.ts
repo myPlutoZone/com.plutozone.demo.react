@@ -36,6 +36,7 @@ export interface SignupRequest {
 export interface LoginResponse {
 	accessToken: string;
 	member: Member;
+	tokenType: string;
 }
 
 export interface AuthContextValue {

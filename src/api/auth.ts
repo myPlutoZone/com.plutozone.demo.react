@@ -21,15 +21,14 @@ import type { LoginRequest, LoginResponse, SignupRequest, Member } from "../type
 
 export async function login(request: LoginRequest): Promise<LoginResponse> {
 	const response = await api.post<LoginResponse> (
-		"/api/v1/member/login.jsp", request
-		// "/auth/login", request
+		"/v1/auth/login", request
 	);
 
 	return response.data;
 }
 
 export async function signup(request: SignupRequest): Promise<void> {
-	await api.post("/auth/signup", request);
+	await api.post("/v1/auth/signup", request);
 }
 
 export async function getMe(): Promise<Member> {

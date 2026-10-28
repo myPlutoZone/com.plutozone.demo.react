@@ -28,10 +28,10 @@ export default function Login() {
 	const { login } = useAuth();
 
 	const [email, setEmail] =
-		useState("pluto@plutozone.com");
+		useState("pluto5@plutozone.com");
 
 	const [password, setPassword] =
-		useState("1234");
+		useState("12345678");
 
 	const [error, setError] =
 		useState("");
