@@ -157,8 +157,8 @@ URL_API_BACKEND=http://127.0.0.1:8080
 | NO | Entity | Method | Function | URI | Response |
 | :---: | :--- | :---: | :--- | :--- | :--- |
 | | Authentication | POST | 회원 가입 | /v1/auth/signup | 201 Created |
-| | Authentication | POST | 로그인 | /auth/login | 200 OK |
-| | Authentication | POST | 로그아웃 | /auth/logout | 204 No Content |
+| | Authentication | POST | 로그인 | /v1/auth/login | 200 OK |
+| | Authentication | POST | 로그아웃 | /v1/auth/logout | 204 No Content |
 <!--
 | | Member | GET | 나의 회원 정보 조회 | /members/me | 200 OK(회원 정보) |
 | | Member | PATCH | 나의 회원 정보 수정 | /members/me | 200 OK(수정된 회원 정보) |
