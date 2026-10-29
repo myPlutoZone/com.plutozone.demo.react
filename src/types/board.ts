@@ -32,7 +32,8 @@ export interface PostRequest {
 }
 
 export interface PageResponse<T> {
-	content: T[];
+	// content: T[];
+	items: T[];
 	page: number;
 	size: number;
 	totalElements: number;

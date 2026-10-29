@@ -91,7 +91,7 @@ export default function BoardList() {
 			)}
 
 			<div className="card">
-				{data?.content.length === 0 ? (
+				{data?.items.length === 0 ? (
 					<div className="empty">
 						등록된 게시글이 없습니다.
 					</div>
@@ -107,7 +107,7 @@ export default function BoardList() {
 						</thead>
 
 						<tbody>
-							{data?.content.map(
+							{data?.items.map(
 								(post) => (
 									<tr key={post.id}>
 										<td>{post.id}</td>

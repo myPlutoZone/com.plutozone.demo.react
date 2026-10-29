@@ -21,8 +21,7 @@ import type { PageResponse, Post, PostRequest } from "../types/board";
 
 export async function getPosts(page = 0, size = 10): Promise<PageResponse<Post>> {
 	const response = await api.get<PageResponse<Post>>(
-		"/api/v1/board/list.jsp",
-		// "/posts",
+		"/v1/posts",
 		{params: {page, size}}
 	);
 	return response.data;
@@ -30,14 +29,14 @@ export async function getPosts(page = 0, size = 10): Promise<PageResponse<Post>>
 
 export async function getPost(id: number): Promise<Post> {
 	const response = await api.get<Post>(
-		`/posts/${id}`
+		`/v1/posts/${id}`
 	);
 	return response.data;
 }
 
 export async function createPost(request: PostRequest): Promise<Post> {
 	const response = await api.post<Post>(
-		"/posts",
+		"/v1/posts",
 		request
 	);
 	return response.data;
@@ -45,12 +44,12 @@ export async function createPost(request: PostRequest): Promise<Post> {
 
 export async function updatePost(id: number, request: PostRequest): Promise<Post> {
 	const response = await api.put<Post>(
-		`/posts/${id}`,
+		`/v1/posts/${id}`,
 		request
 	);
 	return response.data;
 }
 
 export async function deletePost(id: number): Promise<void> {
-	await api.delete(`/posts/${id}`);
+	await api.delete(`/v1/posts/${id}`);
 }

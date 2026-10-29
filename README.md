@@ -100,11 +100,9 @@ Copyright © 2005 plutozone.com All Rights Reserved
 # $ npm create vite@latest com.plutozone.demmo.react -- --template react-ts
 # $ cd com.plutozone.demo.react
 $ npm install
-$ npm run dev
-# http://localhost:5173
+$ npm run dev				# http://localhost:5173
 $ npm run build
-$ npm run preview
-# http://localhost:4173
+$ npm run preview			# http://localhost:4173
 ```
 
 ### 3-4. Project
@@ -150,7 +148,7 @@ com.plutozone.demo.react/
 
 ### 3-5. 환경 설정
 ```text
-URL_API_BACKEND=http://127.0.0.1:8080
+URL_API_BACKEND=http://localhost:8080
 ```
 
 ### 3-6. API
@@ -158,8 +156,8 @@ URL_API_BACKEND=http://127.0.0.1:8080
 | :---: | :--- | :---: | :--- | :--- | :--- |
 | | Authentication | POST | 회원 가입 | /v1/auth/signup | 201 Created |
 | | Authentication | POST | 로그인 | /v1/auth/login | 200 OK |
-| | Authentication | POST | 로그아웃 | /v1/auth/logout | 204 No Content |
 <!--
+| | Authentication | POST | 로그아웃 | /v1/auth/logout | 204 No Content |
 | | Member | GET | 나의 회원 정보 조회 | /members/me | 200 OK(회원 정보) |
 | | Member | PATCH | 나의 회원 정보 수정 | /members/me | 200 OK(수정된 회원 정보) |
 | | Member | DELETE | 회원 탈퇴 | /members/me | 204 No Content |
