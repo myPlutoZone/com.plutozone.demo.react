@@ -194,7 +194,7 @@ DELETE   /boards/{boardId}/posts/{postId} or /posts/{postId}
 #### GET /board/list?page=0&size=10
 ```json
 {
-  "content": [
+  "items": [
     {
       "id": 1,
       "title": "첫 번째 게시글입니다.",
