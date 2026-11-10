@@ -50,10 +50,9 @@ export function AuthProvider({ children }: Props) {
 			setAccessToken(result.accessToken);
 			setMember(result.member);
 		}
-		catch {
-			console.log("[9999]실패(접속)");
+		catch (error) {
+			throw error;
 		}
-
 	}
 
 	async function signup(email: string, password: string, nmNick: string) {
