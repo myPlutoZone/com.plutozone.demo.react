@@ -23,7 +23,7 @@ import { useAuth } from "../contexts/AuthProvider";
 import type { Post } from "../types/board";
 
 export default function BoardDetail() {
-	const { id } = useParams();
+	const { seqPost } = useParams();
 	const navigate = useNavigate();
 
 	const { member } = useAuth();
@@ -38,10 +38,10 @@ export default function BoardDetail() {
 		useState("");
 
 	useEffect(() => {
-		if (id) {
-			loadPost(Number(id));
+		if (seqPost) {
+			loadPost(Number(seqPost));
 		}
-	}, [id]);
+	}, [seqPost]);
 
 	async function loadPost(
 		postId: number
@@ -74,7 +74,7 @@ export default function BoardDetail() {
 		}
 
 		try {
-			await deletePost(post.id);
+			await deletePost(post.seqPost);
 
 			alert(
 				"게시글이 삭제되었습니다."
@@ -105,7 +105,7 @@ export default function BoardDetail() {
 	}
 
 	const isAuthor =
-		member?.id === post.authorId;
+		member?.seqMbr === post.register;
 
 	return (
 		<section>
@@ -115,12 +115,12 @@ export default function BoardDetail() {
 
 					<div className="post-meta">
 						<span>
-							작성자: {post.authorName}
+							작성자: {post.registerNmNick}
 						</span>
 
 						<span>
 							{new Date(
-								post.createdAt
+								post.dtReg
 							).toLocaleString("ko-KR")}
 						</span>
 					</div>
@@ -141,7 +141,7 @@ export default function BoardDetail() {
 					{isAuthor && (
 						<>
 							<Link
-								to={`/posts/${post.id}/edit`}
+								to={`/posts/${post.seqPost}/edit`}
 								className="button"
 							>
 								수정

@@ -22,26 +22,17 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthProvider";
 
 export default function Login() {
-	const navigate = useNavigate();
-	const location = useLocation();
+	const navigate			= useNavigate();
+	const location			= useLocation();
+	const { login }			= useAuth();
 
-	const { login } = useAuth();
+	const [email, setEmail]			= useState("pluto@plutozone.com");
+	const [password, setPassword]	= useState("12345678");
 
-	const [email, setEmail] =
-		useState("pluto5@plutozone.com");
+	const [error, setError]		= useState("");
+	const [loading, setLoading]	= useState(false);
 
-	const [password, setPassword] =
-		useState("12345678");
-
-	const [error, setError] =
-		useState("");
-
-	const [loading, setLoading] =
-		useState(false);
-
-	async function handleSubmit(
-		event: FormEvent<HTMLFormElement>
-	) {
+	async function handleSubmit(event: FormEvent<HTMLFormElement>) {
 		event.preventDefault();
 
 		setError("");
@@ -53,9 +44,7 @@ export default function Login() {
 			navigate(from, {replace: true});
 		}
 		catch {
-			setError(
-				"이메일 또는 암호가 올바르지 않습니다."
-			);
+			setError("이메일 또는 암호가 올바르지 않습니다.");
 		}
 		finally {
 			setLoading(false);
@@ -63,65 +52,27 @@ export default function Login() {
 	}	
 
 	return (
-		
 		<section className="auth-page">
 			<div className="card auth-card">
 				<h1>로그인</h1>
-
-				<form
-					onSubmit={handleSubmit}
-					className="form"
-				>
+				<form onSubmit={handleSubmit} className="form">
 					<label>
 						이메일
-
-						<input
-							type="email"
-							value={email}
-							onChange={(e) =>
-								setEmail(e.target.value)
-							}
-							/* placeholder="email@example.com" */
-							required
-						/>
+						<input type="email" value={email} onChange={(e) => setEmail(e.target.value)} /* placeholder="email@example.com" */ required />
 					</label>
-
 					<label>
 						암호
-
-						<input
-							type="password"
-							value={password}
-							onChange={(e) =>
-								setPassword(e.target.value)
-							}
-							/* placeholder="암호" */
-							required
-						/>
+						<input type="password" value={password} onChange={(e) => setPassword(e.target.value)} /* placeholder="암호" */ required />
 					</label>
-
-					{error && (
-						<p className="error">
-							{error}
-						</p>
-					)}
-
-					<button
-						type="submit"
-						className="button button-primary"
-						disabled={loading}
-					>
-						{loading
-							? "로그인 중..."
-							: "로그인"}
+					{error && (<p className="error">{error}</p>)}
+					<button type="submit" className="button button-primary" disabled={loading}>
+						{loading ? "로그인 중..." : "로그인"}
 					</button>
 				</form>
 
 				<div className="auth-footer">
 					계정이 없으신가요?{" "}
-					<Link to="/signup">
-						회원가입
-					</Link>
+					<Link to="/signup">회원가입</Link>
 				</div>
 			</div>
 		</section>

@@ -17,13 +17,13 @@
  *				: [20261027185600][pluto#plutozone.com][CREATE: Initial Release]
 */
 export interface Post {
-	id: number;
+	seqPost: number;
 	title: string;
 	content: string;
-	authorId: number;
-	authorName: string;
-	createdAt: string;
-	updatedAt: string;
+	register: number;
+	registerNmNick: string;
+	dtReg: string;
+	dtUpt: string;
 }
 
 export interface PostRequest {

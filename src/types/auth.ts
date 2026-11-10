@@ -17,9 +17,9 @@
  *				: [20261027185600][pluto#plutozone.com][CREATE: Initial Release]
 */
 export interface Member {
-	id: number;
+	seqMbr: number;
 	email: string;
-	name: string;
+	nmNick: string;
 }
 
 export interface LoginRequest {
@@ -30,7 +30,7 @@ export interface LoginRequest {
 export interface SignupRequest {
 	email: string;
 	password: string;
-	name: string;
+	nmNick: string;
 }
 
 export interface LoginResponse {
@@ -50,7 +50,7 @@ export interface AuthContextValue {
 	signup: (
 		email: string,
 		password: string,
-		name: string
+		nmNick: string
 	) => Promise<void>;
 	logout: () => void;
 }

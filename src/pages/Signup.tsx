@@ -25,7 +25,7 @@ export default function Signup() {
 	const navigate = useNavigate();
 	const { signup } = useAuth();
 
-	const [name, setName] =
+	const [nmNick, setNmNick] =
 		useState("플루토");
 
 	const [email, setEmail] =
@@ -64,7 +64,7 @@ export default function Signup() {
 			await signup(
 				email,
 				password,
-				name
+				nmNick
 			);
 
 			alert(
@@ -94,9 +94,9 @@ export default function Signup() {
 
 						<input
 							type="text"
-							value={name}
+							value={nmNick}
 							onChange={(e) =>
-								setName(e.target.value)
+								setNmNick(e.target.value)
 							}
 							required
 						/>

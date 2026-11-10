@@ -22,12 +22,12 @@ import { useNavigate, useParams } from "react-router-dom";
 import { createPost, getPost, updatePost } from "../api/board";
 
 export default function BoardForm() {
-	const { id } = useParams();
+	const { seqPost } = useParams();
 
 	const navigate = useNavigate();
 
 	const isEdit =
-		Boolean(id);
+		Boolean(seqPost);
 
 	const [title, setTitle] =
 		useState("");
@@ -45,8 +45,8 @@ export default function BoardForm() {
 		useState("");
 
 	useEffect(() => {
-		if (isEdit && id) {
-			loadPost(Number(id));
+		if (isEdit && seqPost) {
+			loadPost(Number(seqPost));
 		}
 	}, [id, isEdit]);
 
@@ -93,9 +93,9 @@ export default function BoardForm() {
 		setLoading(true);
 
 		try {
-			if (isEdit && id) {
+			if (isEdit && seqPost) {
 				await updatePost(
-					Number(id),
+					Number(seqPost),
 					{
 						title,
 						content,
@@ -106,7 +106,7 @@ export default function BoardForm() {
 					"게시글이 수정되었습니다."
 				);
 
-				navigate(`/posts/${id}`);
+				navigate(`/posts/${seqPost}`);
 			} else {
 				const post =
 					await createPost({
@@ -118,7 +118,7 @@ export default function BoardForm() {
 					"게시글이 등록되었습니다."
 				);
 
-				navigate(`/posts/${post.id}`);
+				navigate(`/posts/${post.seqPost}`);
 			}
 		} catch {
 			setError(

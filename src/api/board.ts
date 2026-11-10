@@ -27,9 +27,9 @@ export async function getPosts(page = 0, size = 10): Promise<PageResponse<Post>>
 	return response.data;
 }
 
-export async function getPost(id: number): Promise<Post> {
+export async function getPost(seqPost: number): Promise<Post> {
 	const response = await api.get<Post>(
-		`/v1/posts/${id}`
+		`/v1/posts/${seqPost}`
 	);
 	return response.data;
 }
@@ -42,14 +42,14 @@ export async function createPost(request: PostRequest): Promise<Post> {
 	return response.data;
 }
 
-export async function updatePost(id: number, request: PostRequest): Promise<Post> {
+export async function updatePost(seqPost: number, request: PostRequest): Promise<Post> {
 	const response = await api.put<Post>(
-		`/v1/posts/${id}`,
+		`/v1/posts/${seqPost}`,
 		request
 	);
 	return response.data;
 }
 
-export async function deletePost(id: number): Promise<void> {
-	await api.delete(`/v1/posts/${id}`);
+export async function deletePost(seqPost: number): Promise<void> {
+	await api.delete(`/v1/posts/${seqPost}`);
 }

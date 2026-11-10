@@ -20,33 +20,22 @@ import { createContext, useContext, useState, type ReactNode } from "react";
 import type { AuthContextValue, Member } from "../types/auth";
 import * as authApi from "../api/auth";
 
-const AuthContext =
-	createContext<AuthContextValue | undefined>(
-		undefined
-	);
+const AuthContext =	createContext<AuthContextValue | undefined>(undefined);
 
 interface Props {
 	children: ReactNode;
 }
 
 export function AuthProvider({ children }: Props) {
-	const [accessToken, setAccessToken] =
-		useState<string | null>(
-			localStorage.getItem("accessToken")
-		);
-
-	const [member, setMember] =
-		useState<Member | null>(() => {
-			const savedMember =
-				localStorage.getItem("member");
-
-			if (!savedMember) {
-				return null;
-			}
+	const [accessToken, setAccessToken]	= useState<string | null>(localStorage.getItem("accessToken"));
+	const [member, setMember]			= useState<Member | null>(() => {
+			const savedMember = localStorage.getItem("member");
+			if (!savedMember) {return null;}
 
 			try {
 				return JSON.parse(savedMember) as Member;
-			} catch {
+			}
+			catch {
 				return null;
 			}
 		});
@@ -67,16 +56,8 @@ export function AuthProvider({ children }: Props) {
 
 	}
 
-	async function signup(
-		email: string,
-		password: string,
-		name: string
-	) {
-		await authApi.signup({
-			email,
-			password,
-			name,
-		});
+	async function signup(email: string, password: string, nmNick: string) {
+		await authApi.signup({email, password, nmNick});
 	}
 
 	function logout() {
@@ -87,14 +68,7 @@ export function AuthProvider({ children }: Props) {
 		setMember(null);
 	}
 
-	const value: AuthContextValue = {
-		member,
-		accessToken,
-		isAuthenticated: !!accessToken,
-		login,
-		signup,
-		logout,
-	};
+	const value: AuthContextValue = {member, accessToken, isAuthenticated: !!accessToken, login, signup, logout};
 
 	return (
 		<AuthContext.Provider value={value}>

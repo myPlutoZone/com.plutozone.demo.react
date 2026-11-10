@@ -109,24 +109,24 @@ export default function BoardList() {
 						<tbody>
 							{data?.items.map(
 								(post) => (
-									<tr key={post.id}>
-										<td>{post.id}</td>
+									<tr key={post.seqPost}>
+										<td>{post.seqPost}</td>
 
 										<td>
 											<Link
-												to={`/posts/${post.id}`}
+												to={`/posts/${post.seqPost}`}
 											>
 												{post.title}
 											</Link>
 										</td>
 
 										<td>
-											{post.authorName}
+											{post.registerNmNick}
 										</td>
 
 										<td>
 											{new Date(
-												post.createdAt
+												post.dtReg
 											).toLocaleDateString(
 												"ko-KR"
 											)}
