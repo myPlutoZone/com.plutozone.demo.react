@@ -19,6 +19,7 @@
 import type { FormEvent } from "react";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { messageErrorApi } from "../api/client";
 import { useAuth } from "../contexts/AuthProvider";
 
 export default function Signup() {
@@ -52,7 +53,7 @@ export default function Signup() {
 
 		if (password !== passwordConfirm) {
 			setError(
-				"암호가 일치하지 않습니다."
+				"암호가 일치하지 않습니다!"
 			);
 
 			return;
@@ -72,9 +73,9 @@ export default function Signup() {
 			);
 
 			navigate("/login");
-		} catch {
+		} catch (error: unknown) {
 			setError(
-				"회원가입에 실패했습니다."
+				messageErrorApi(error, "회원가입에 실패했습니다!")
 			);
 		} finally {
 			setLoading(false);

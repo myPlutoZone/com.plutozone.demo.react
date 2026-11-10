@@ -19,6 +19,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { getPosts } from "../api/board";
+import { messageErrorApi } from "../api/client";
 import type { PageResponse, Post } from "../types/board";
 
 export default function BoardList() {
@@ -49,9 +50,9 @@ export default function BoardList() {
 				await getPosts(page, 10);
 
 			setData(result);
-		} catch {
+		} catch (error: unknown) {
 			setError(
-				"게시글을 불러오지 못했습니다."
+				messageErrorApi(error, "게시글을 불러오지 못했습니다!")
 			);
 		} finally {
 			setLoading(false);

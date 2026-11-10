@@ -20,6 +20,7 @@ import type { FormEvent } from "react";
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { createPost, getPost, updatePost } from "../api/board";
+import { messageErrorApi } from "../api/client";
 
 export default function BoardForm() {
 	const { seqPost } = useParams();
@@ -48,7 +49,7 @@ export default function BoardForm() {
 		if (isEdit && seqPost) {
 			loadPost(Number(seqPost));
 		}
-	}, [id, isEdit]);
+	}, [seqPost, isEdit]);
 
 	async function loadPost(
 		postId: number
@@ -59,9 +60,9 @@ export default function BoardForm() {
 
 			setTitle(post.title);
 			setContent(post.content);
-		} catch {
+		} catch (error: unknown) {
 			setError(
-				"게시글을 불러오지 못했습니다."
+				messageErrorApi(error, "게시글을 불러오지 못했습니다!")
 			);
 		} finally {
 			setInitialLoading(false);
@@ -120,9 +121,9 @@ export default function BoardForm() {
 
 				navigate(`/posts/${post.seqPost}`);
 			}
-		} catch {
+		} catch (error: unknown) {
 			setError(
-				"게시글 저장에 실패했습니다."
+				messageErrorApi(error, "게시글 저장에 실패했습니다!")
 			);
 		} finally {
 			setLoading(false);

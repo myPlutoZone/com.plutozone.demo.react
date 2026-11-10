@@ -20,6 +20,7 @@ import axios from "axios";
 import type { FormEvent } from "react";
 import { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { messageErrorApi } from "../api/client";
 import { useAuth } from "../contexts/AuthProvider";
 
 export default function Login() {
@@ -45,24 +46,11 @@ export default function Login() {
 			navigate(from, {replace: true});
 		}
 		catch (error: unknown) {
-			if (!axios.isAxiosError(error)) {
-				setError("알 수 없는 오류가 발생했습니다!");
-			}
-			else if (!error.response) {
-				// 서버 응답 자체가 없음(인터넷 연결, 서버 중단, CORS, 타임아웃 등)
-				setError("서버에 연결할 수 없습니다. 잠시 후 다시 시도해 주세요!");
-			}
-			else if (error.response.status === 401) {
-				// 백엔드가 로그인 실패를 401로 반환한다는 계약이 필요
+			if (axios.isAxiosError(error) && error.response?.status === 401) {
 				setError("이메일 또는 암호가 올바르지 않습니다!");
+				return;
 			}
-			else if (error.response.status >= 500) {
-				setError("서버 오류가 발생했습니다. 잠시 후 다시 시도해 주세요!");
-			}
-			else {
-				setError("로그인 처리 중 오류가 발생했습니다!");
-			}
-			// setError("이메일 또는 암호가 올바르지 않습니다.");
+			setError(messageErrorApi(error, "로그인 처리중 오류가 발생했습니다!"));
 		}
 		finally {
 			setLoading(false);

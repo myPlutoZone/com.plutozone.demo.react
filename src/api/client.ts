@@ -27,6 +27,43 @@ export const api = axios.create({
 	},
 });
 
+export function messageErrorApi(
+	error: unknown,
+	fallback = "요청 처리 중 오류가 발생했습니다!"
+): string {
+	if (!axios.isAxiosError(error)) {
+		return fallback;
+	}
+
+	// 401은 요청을 보낸 화면에서 상황에 맞게 처리
+	if (error.response?.status === 401) {
+		return fallback;
+	}
+
+	if (!error.response) {
+		if (error.code === "ECONNABORTED") {
+			return "요청 시간이 초과되었습니다! 잠시 후 다시 시도해 주세요!";
+		}
+		return "서버에 연결할 수 없습니다! 잠시 후 다시 시도해 주세요!";
+	}
+
+	switch (error.response.status) {
+		case 403:
+			return "요청을 처리할 권한이 없습니다!";
+		case 404:
+			return "요청한 정보를 찾을 수 없습니다!";
+		case 409:
+			return "이미 처리되었거나 현재 상태와 충돌하는 요청입니다!";
+		case 429:
+			return "요청이 너무 많습니다! 잠시 후 다시 시도해 주세요!";
+		default:
+			if (error.response.status >= 500) {
+				return "서버 오류가 발생했습니다! 잠시 후 다시 시도해 주세요!";
+			}
+			return fallback;
+	}
+}
+
 api.interceptors.request.use((config) => {
 	const token = localStorage.getItem("accessToken");
 

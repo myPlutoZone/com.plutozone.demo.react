@@ -36,7 +36,7 @@ export default function Layout() {
 
 						{isAuthenticated && member ? (
 							<>
-								<span className="member">{member.name}님</span>
+								<span className="member">{member.nmNick}님</span>
 								<button className="button button-small" onClick={logout}>로그아웃</button>
 							</>
 						) : (

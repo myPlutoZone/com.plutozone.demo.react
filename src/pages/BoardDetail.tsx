@@ -19,6 +19,7 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { deletePost, getPost } from "../api/board";
+import { messageErrorApi } from "../api/client";
 import { useAuth } from "../contexts/AuthProvider";
 import type { Post } from "../types/board";
 
@@ -51,9 +52,9 @@ export default function BoardDetail() {
 				await getPost(postId);
 
 			setPost(result);
-		} catch {
+		} catch (error: unknown) {
 			setError(
-				"게시글을 찾을 수 없습니다."
+				messageErrorApi(error, "게시글을 찾을 수 없습니다!")
 			);
 		} finally {
 			setLoading(false);
@@ -81,9 +82,9 @@ export default function BoardDetail() {
 			);
 
 			navigate("/posts");
-		} catch {
+		} catch (error: unknown) {
 			alert(
-				"게시글 삭제에 실패했습니다."
+				messageErrorApi(error, "게시글 삭제에 실패했습니다!")
 			);
 		}
 	}
